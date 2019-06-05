@@ -7,6 +7,23 @@ class admin_model extends CI_Model{
     $this->load->helper('file');
   }
 
+  //core
+  public function deleteData($table, $whereVar, $whereVal)
+  {
+    $where = array($whereVar => $whereval );
+    return $this->db->delete($table, $where);
+  }
+
+  public function getAllData($table)
+  {
+    return $this->db->get($table)->result();
+  }
+
+  
+  //functional
+
+  //application
+
  public function adminValidation()
  {
    $where = array(
@@ -31,19 +48,6 @@ class admin_model extends CI_Model{
  }
 
 
-
-  public function adminCreate()
-  {
-    $data = array(
-      'username' => $this->input->post('username'),
-      'password' => md5($this->input->post('password')),
-      'nama_perpustakaan' => $this->input->post('nama_perpustakaan'),
-      'alamat_perpustakaan' => $this->input->post('alamat_perpustakaan'),
-      'id_kota' => $this->input->post('id_kota')
-    );
-
-    $this->db->insert('perpustakaan',$data);
-  }
   public function updateAdmin()
   {
     $where = array('id' => $this->session->userdata['id'] );
@@ -248,8 +252,7 @@ class admin_model extends CI_Model{
       'password' => md5($this->input->post('password')),
       'fullname' => $this->input->post('fullname'),
       'previlleges'=> 'user'
-    );  
-
+    );
     $this->db->insert('account',$data);
   }
 

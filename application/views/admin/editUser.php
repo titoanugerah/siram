@@ -5,7 +5,7 @@
       <form role="form" method="post">
         <div class="box-body">
           <div class="form-group">
-            <h1> Edit akun <?php echo $user->fullname; ?>  </h1>
+            <h1> Detail Akun  <?php echo $user->fullname; ?>  </h1>
           </div>
           <div class="form-group">
             <label for="">Username</label>
@@ -22,7 +22,9 @@
       </div>
               <!-- /.box-body -->
       <div class="box-footer">
-        <button type="submit" class="btn btn-primary" name="updateUser" value="updateUser">Perbaharui Data</button>
+        <button type="submit" class="btn btn-primary" name="updateUser" value="updateUser">Perbaharui Akun</button>
+        <button type="submit" class="btn btn-danger" name="deleteUser" value="deleteUser">Hapus AKun</button>
+
       </div>
     </form>
     </div>

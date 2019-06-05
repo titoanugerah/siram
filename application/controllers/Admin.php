@@ -88,44 +88,32 @@ class Admin extends CI_Controller{
 
   public function user()
   {
+    $data['notification'] = "no";
+    if ($this->input->post('createUser')) {
+        $this->admin_model->createUser();
+        $data['notification'] = "createUserSuccess";
+    }
     $data['node'] = $this->admin_model->getNode();
     $data['user'] = $this->admin_model->getUser();
-    $data['notification'] = "no";
     $data['view_name'] = "rekapUser";
     $this->load->view('admin/template',$data);
   }
-
-  public function createUser()
-  {
-      if ($this->input->post('createUser')) {
-          $this->admin_model->createUser();
-          redirect(base_url('adminHome'));
-      } else {
-        $data['node'] = $this->admin_model->getNode();
-        $data['notification'] = 'dataCreateAlert';
-        $data['view_name'] = 'createUser';
-        $this->load->view('admin/template',$data);
-      }
-  }
-
-
 
   public function editUser($id)
   {
     if ($this->input->post('updateUser')) {
       $this->admin_model->updateUser($id);
       $data['notification'] = 'dataCreateSuccess';
-      $data['node'] = $this->admin_model->getNode();
-      $data['user'] = $this->admin_model->getUser();
-  		$data['view_name'] = "adminHome";
-  		$this->load->view('admin/template',$data);
-    } else {
+    } elseif ($this->input->post('deleteUser')) {
+      $this->admin_model->deleteData('');
+      $data['notification'] = 'dataCreateSuccess';
+    }
     $data['node'] = $this->admin_model->getNode();
     $data['user'] = $this->admin_model->getSelectedUser($id);
     $data['notification'] = 'dataCreateAlert';
     $data['view_name'] = 'editUser';
     $this->load->view('admin/template',$data);
-    }
+
   }
 
   public function deleteUser($id)
