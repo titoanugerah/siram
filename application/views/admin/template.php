@@ -87,17 +87,12 @@ redirect(base_url('userLogin'));
         </li>
       </ul>
       <ul class="sidebar-menu">
-        <li class="header">Akun User</li>
+        <li class="header">Konfigurasi</li>
       <li>
-          <a href="<?php echo base_url('rekapUser'); ?>">
-            <i class="fa fa-users"></i> <span>Rekap User</span>
+          <a href="<?php echo base_url('user'); ?>">
+            <i class="fa fa-users"></i> <span>Pengguna</span>
           </a>
       </li>
-      <li>
-          <a href="<?php echo base_url('createUser'); ?>">
-            <i class="fa fa-plus"></i> <span>Buat User</span>
-          </a>
-        </li>
       </ul>
       <ul class="sidebar-menu">
         <li class="header">Node</li>
@@ -237,7 +232,7 @@ redirect(base_url('userLogin'));
       endforeach;
       }
       //print_r($devPoint);
-      //die();  
+      //die();
        ?>
      //--------------
      //- AREA CHART -

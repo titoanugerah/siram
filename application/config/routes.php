@@ -30,7 +30,7 @@ $route['udara/(:any)'] = 'admin/udara/$1';
 $route['editUser/(:any)'] = 'admin/editUser/$1';
 $route['deleteUser/(:any)'] = 'admin/deleteUser/$1';
 $route['createUser'] = 'admin/createUser';
-$route['rekapUser'] = 'admin/rekapUser';
+$route['user'] = 'admin/user';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

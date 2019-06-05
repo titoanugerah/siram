@@ -86,7 +86,7 @@ class Admin extends CI_Controller{
     }
   }
 
-  public function rekapUser()
+  public function user()
   {
     $data['node'] = $this->admin_model->getNode();
     $data['user'] = $this->admin_model->getUser();

@@ -321,6 +321,20 @@
  <script src="<?php echo base_url('./assets/plugins/chartjs/Chart.min.js'); ?>"></script>
 
  <script>
+ $("#example1").DataTable();
+ $('#example2').DataTable({
+   "paging": true,
+   "lengthChange": false,
+   "searching": true,
+   "ordering": true,
+   "info": true,
+   "autoWidth": true
+ });
+
+ </script>
+
+
+ <script>
    $(function () {
      /* ChartJS
       * -------
@@ -342,7 +356,7 @@
           $devPoint[] = $item->data;
         }
       endforeach;
-      } 
+      }
       ?>
      //--------------
      //- AREA CHART -
@@ -352,15 +366,6 @@
      <?php
      if (!empty($devPoint)) {
      ?>
-     $("#example1").DataTable();
-     $('#example2').DataTable({
-       "paging": true,
-       "lengthChange": false,
-       "searching": true,
-       "ordering": true,
-       "info": true,
-       "autoWidth": true
-     });
      var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
      // This will get the first returned node in the jQuery collection.
      var areaChart = new Chart(areaChartCanvas);
