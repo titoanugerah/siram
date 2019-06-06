@@ -42,6 +42,9 @@ class Account extends CI_Controller {
 
 	public function profile()
 	{
+		if ($this->input->post('updateAccount')) {
+			$this->session->set_userdata($this->account_model->updateAccount());
+		}
 		$data['content'] = $this->account_model->cProfile();
 		$this->load->view('template', $data);
 	}

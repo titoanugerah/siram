@@ -29,7 +29,6 @@
 <div class="login-box">
   <div class="login-logo">
     <a><b>SI</b>RAM</a> <br>
-    <a>Login</a>
 
   </div>
   <!-- /.login-logo -->

@@ -92,7 +92,7 @@ redirect(base_url('userLogin'));
 
       <!-- /.row -->
       <?php $this->load->view('notification/'.$content['notification']); ?>
-      <?php $this->load->view('admin/'.$content['view_name']); ?>
+      <?php $this->load->view($this->session->userdata['previlleges'].'/'.$content['view_name']); ?>
 
       <!-- Main row -->
 
