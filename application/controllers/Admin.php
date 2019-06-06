@@ -17,8 +17,8 @@ class Admin extends CI_Controller{
   {
     $data['content'] = $this->admin_model->cUser();
     if ($this->input->post('createUser')) {
-        $this->admin_model->createUser();
-        $data['notification'] = "createUserSuccess";
+      $this->admin_model->createUser();
+      $data['notification'] = "createUserSuccess";
     }
     $this->load->view('template',$data);
   }
@@ -33,13 +33,23 @@ class Admin extends CI_Controller{
 
   }
 
+  public function node()
+  {
+    $operation = 2;
+    $data['content'] = $this->admin_model->cNode();
+    $this->load->view('template',$data);    
+  }
+
+
+  //trash
+
   public function deleteUser($id)
   {
     $this->admin_model->deleteUser($id);
     redirect(base_url('adminHome'));
   }
 
-  public function node($id){
+  public function detailNode($id){
     if ($this->input->post('switchON')) {
       $this->admin_model->switchON($id);
       $data['node'] = $this->admin_model->getNode();

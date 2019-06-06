@@ -9,7 +9,9 @@ $route['profile'] = 'account/profile';
 
 $route['user'] = 'admin/user';
 $route['detailUser/(:any)'] = 'admin/detailUser/$1';
+$route['node'] = 'admin/node';
 
+$route['detailNode/(:any)'] = 'admin/detailNode/$1';
 
 $route['informasiNode/(:any)'] = 'user/informasiNode/$1';
 $route['dataTanah/(:any)'] = 'user/dataTanah/$1';
@@ -19,8 +21,6 @@ $route['dataUdara/(:any)'] = 'user/dataUdara/$1';
 //$route['lihatProfil'] = 'user/lihatProfil';
 //$route['adminLogin'] = 'account/login';
 $route['createNode'] = 'admin/createNode';
-$route['rekapNode'] = 'admin/rekapNode';
-$route['node/(:any)'] = 'admin/node/$1';
 $route['editNode/(:any)'] = 'admin/editNode/$1';
 $route['deleteNode/(:any)'] = 'admin/deleteNode/$1';
 $route['tanah/(:any)'] = 'admin/tanah/$1';

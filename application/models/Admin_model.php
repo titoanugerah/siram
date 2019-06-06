@@ -83,6 +83,17 @@ class admin_model extends CI_Model{
     return 1;
   }
 
+  public function cNode()
+  {
+    $data['node'] = $this->getAllData('view_node');
+    $data['notification'] = "no";
+    $data['view_name'] = "rekapNode";
+    return $data;
+  }
+
+
+
+
   //trash
   public function getConfCode()
   {
