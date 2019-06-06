@@ -1,7 +1,7 @@
 <ul class="sidebar-menu">
   <li class="header">Beranda</li>
 <li>
-    <a href="<?php echo base_url('adminHome'); ?>">
+    <a href="<?php echo base_url('dashboard'); ?>">
       <i class="fa fa-h-square"></i> <span>Halaman Utama</span>
     </a>
   </li>
@@ -48,13 +48,12 @@
 <ul class="sidebar-menu">
   <li class="header">Akun</li>
     <li>
-    <a href="<?php echo base_url('adminEdit'); ?>">
-      <i class="fa fa-edit"></i> <span>Edit Profil</span>
+    <a href="<?php echo base_url('profile'); ?>">
+      <i class="fa fa-edit"></i> <span>Profil</span>
     </a>
     </li>
-
     <li>
-    <a href="<?php echo base_url('adminLogout'); ?>">
+    <a href="<?php echo base_url('logout'); ?>">
       <i class="fa fa-sign-out"></i> <span>Logout Akun</span>
     </a>
     </li>

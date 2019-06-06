@@ -78,6 +78,14 @@ class Account_model extends CI_model{
     return $data;
   }
 
+  public function cProfile()
+  {
+    $data['node'] = $this->getAllData('view_node');
+    $data['view_name'] = 'profile';
+    $data['notification'] = 'no';
+    return $data;
+  }
+
 }
 
 

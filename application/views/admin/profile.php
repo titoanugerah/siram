@@ -5,11 +5,11 @@
       <form role="form" method="post">
         <div class="box-body">
           <div class="form-group">
-            <h1> Detail Akun  <?php echo $user->fullname; ?>  </h1>
+            <h1> Detail Akun  <?php echo "@".$this->session->userdata['username']; ?>  </h1>
           </div>
           <div class="form-group">
             <label for="">Username</label>
-            <input type="text" class="form-control"  name="username" value="<?php echo $user->username; ?>">
+            <input type="text" class="form-control"  name="username" value="<?php echo $this->session->userdata['username']; ?>">
           </div>
           <div class="form-group">
             <label for="">Password</label>
@@ -17,7 +17,7 @@
           </div>
             <div class="form-group">
           <label for="">Nama Lengkap</label>
-          <input type="text" class="form-control"  name="fullname" value="<?php echo $user->fullname ?>">
+          <input type="text" class="form-control"  name="fullname" value="<?php echo $this->session->userdata['fullname'] ?>">
         </div>
       </div>
               <!-- /.box-body -->

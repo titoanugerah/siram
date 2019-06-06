@@ -21,7 +21,7 @@ class Account extends CI_Controller {
 			$operation = $this->account_model->loginValidation();
 			if ($operation['status']==1) {
 				$this->session->set_userdata($operation['session']);
-				redirect($this->session->userdata['previlleges'].'Home');
+				redirect(base_url('dashboard'));
 			}
 		}
 		$data['notification'] = 'login'.$operation['status'];
@@ -34,6 +34,17 @@ class Account extends CI_Controller {
 		$this->load->view('template',$data);
 	}
 
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect(base_url('login'));
+	}
+
+	public function profile()
+	{
+		$data['content'] = $this->account_model->cProfile();
+		$this->load->view('template', $data);
+	}
 
 	public function temp()
 	{
