@@ -11,40 +11,14 @@ class Admin extends CI_Controller{
   public function index(){
     redirect(base_url('adminHome'));
   }
-//adminLogin has been deprecated due merged previlleges loginFailed
-/*
-  public function adminLogin()
-  {
-    if ($this->input->post('adminValidation')) {
-      $admin = $this->admin_model->adminValidation();
-      if ($admin->num_rows() > 0) {
-        $data['admin'] = $this->admin_model->getLoggedAdmin();
-        $data_session = array(
-          'login' => true,
-          'id' => $data['admin']->id,
-          'username' => $data['admin']->username,
-          'password' => $data['admin']->password,
-          'fullname' => $data['admin']->fullname
-        );
-        $this->session->set_userdata($data_session);
-        redirect(base_url('adminHome'));
-      } else {
-        $this->load->view('notification/loginFailed');
-        $this->load->view('admin/adminLogin');
-      }
-    }
-    else {
-    $this->load->view('admin/adminLogin');
-    }
-  }
-*/
+
 	public function adminHome()
 	{
     $data['node'] = $this->admin_model->getNode();
     $data['user'] = $this->admin_model->getUser();
 		$data['notification'] = "no";
 		$data['view_name'] = "adminHome";
-		$this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
 	}
 
 	public function adminLogout()
@@ -58,7 +32,7 @@ class Admin extends CI_Controller{
     $data['node'] = $this->admin_model->getNode();
 		$data['notification'] = 'no';
     $data['view_name'] = 'adminProfil';
-    $this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
 	}
 
 	public function adminEdit()
@@ -77,12 +51,12 @@ class Admin extends CI_Controller{
       $data['node'] = $this->admin_model->getNode();
       $data['notification'] = 'dataCreateSuccess';
       $data['view_name'] = 'adminEdit';
-      $this->load->view('admin/template',$data);
+      $this->load->view('template',$data);
     } else {
     $data['node'] = $this->admin_model->getNode();
     $data['notification'] = 'dataCreateAlert';
     $data['view_name'] = 'adminEdit';
-    $this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
     }
   }
 
@@ -96,7 +70,7 @@ class Admin extends CI_Controller{
     $data['node'] = $this->admin_model->getNode();
     $data['user'] = $this->admin_model->getUser();
     $data['view_name'] = "rekapUser";
-    $this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
   }
 
   public function editUser($id)
@@ -112,7 +86,7 @@ class Admin extends CI_Controller{
     $data['user'] = $this->admin_model->getSelectedUser($id);
     $data['notification'] = 'dataCreateAlert';
     $data['view_name'] = 'editUser';
-    $this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
 
   }
 
@@ -129,20 +103,20 @@ class Admin extends CI_Controller{
       $data['info'] = $this->admin_model->getNodeInfo($id);
       $data['view_name'] = "node";
       $data['notification'] = 'switchON';
-      $this->load->view('admin/template',$data);
+      $this->load->view('template',$data);
     } else if ($this->input->post('switchOFF')) {
       $this->admin_model->switchOFF($id);
       $data['node'] = $this->admin_model->getNode();
       $data['info'] = $this->admin_model->getNodeInfo($id);
       $data['view_name'] = "node";
       $data['notification'] = 'switchOFF';
-      $this->load->view('admin/template',$data);
+      $this->load->view('template',$data);
     } else {
     $data['node'] = $this->admin_model->getNode();
     $data['info'] = $this->admin_model->getNodeInfo($id);
     $data['view_name'] = "node";
     $data['notification'] = 'nodeNotification';
-    $this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
     }
   }
 
@@ -151,7 +125,7 @@ class Admin extends CI_Controller{
     $data['node'] = $this->admin_model->getNode();
     $data['notification'] = "no";
     $data['view_name'] = "rekapNode";
-    $this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
   }
 
   public function editNode($id)
@@ -181,20 +155,20 @@ class Admin extends CI_Controller{
       $data['node'] = $this->admin_model->getNode();
       $data['view_name'] = "node";
       $data['notification'] = 'nodeNotification';
-      $this->load->view('admin/template',$data);
+      $this->load->view('template',$data);
     } else if ($this->input->post('deleteNode')) {
       $this->admin_model->deleteNode($id);
       $data['node'] = $this->admin_model->getNode();
       $data['view_name'] = "adminHome";
       $data['notification'] = 'nodeDeleted';
-      $this->load->view('admin/template',$data);
+      $this->load->view('template',$data);
     } else {
       $data['komoditas'] = $this->admin_model->getKomoditas();
       $data['node'] = $this->admin_model->getNode();
       $data['info'] = $this->admin_model->getNodeInfo($id);
       $data['view_name'] = "editNode";
       $data['notification'] = 'dataCreateAlert';
-      $this->load->view('admin/template',$data);
+      $this->load->view('template',$data);
     }
   }
 
@@ -211,7 +185,7 @@ class Admin extends CI_Controller{
     $data['dataNode'] = $this->admin_model->getDataTanah($id);
     $data['view_name'] = "tanah";
     $data['notification'] = 'nodeNotification';
-    $this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
   }
 
   public function suhu($id)
@@ -223,7 +197,7 @@ class Admin extends CI_Controller{
     // die();
     $data['view_name'] = "suhu";
     $data['notification'] = 'nodeNotification';
-    $this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
   }
 
   public function dewPoint($id)
@@ -233,7 +207,7 @@ class Admin extends CI_Controller{
     $data['dataNode'] = $this->admin_model->getDataDewPoint($id);
     $data['view_name'] = "dewPoint";
     $data['notification'] = 'nodeNotification';
-    $this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
   }
 
   public function udara($id)
@@ -243,7 +217,7 @@ class Admin extends CI_Controller{
     $data['dataNode'] = $this->admin_model->getDataUdara($id);
     $data['view_name'] = "udara";
     $data['notification'] = 'nodeNotification';
-    $this->load->view('admin/template',$data);
+    $this->load->view('template',$data);
   }
 
   public function createNode()
@@ -271,7 +245,7 @@ class Admin extends CI_Controller{
           }
           $data['node'] = $this->admin_model->getNode();
           $data['view_name'] = "rekapNode";
-          $this->load->view('admin/template',$data);
+          $this->load->view('template',$data);
             # code...
 
       } else {
@@ -279,7 +253,7 @@ class Admin extends CI_Controller{
         $data['node'] = $this->admin_model->getNode();
         $data['notification'] = 'dataCreateAlert';
         $data['view_name'] = 'createNode';
-        $this->load->view('admin/template',$data);
+        $this->load->view('template',$data);
       }
   }
 }

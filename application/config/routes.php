@@ -2,8 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'user';
-$route['userLogin'] = 'user/login';
-$route['login'] = 'user/login';
+//$route['userLogin'] = 'account/login';
+$route['login'] = 'account/login';
+$route['dashboard'] = 'account/dashboard';
 $route['userHome'] = 'user/userHome';
 $route['akunEdit'] = 'user/akunEdit';
 $route['userLogout'] = 'user/userLogout';
@@ -14,7 +15,7 @@ $route['dataSuhu/(:any)'] = 'user/dataSuhu/$1';
 $route['dataDewPoint/(:any)'] = 'user/dataDewPoint/$1';
 $route['dataUdara/(:any)'] = 'user/dataUdara/$1';
 //$route['lihatProfil'] = 'user/lihatProfil';
-$route['adminLogin'] = 'user/login';
+//$route['adminLogin'] = 'account/login';
 $route['adminHome'] = 'admin/adminHome';
 $route['adminEdit'] = 'admin/adminEdit';
 $route['adminLogout'] = 'admin/adminLogout';

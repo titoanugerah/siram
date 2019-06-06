@@ -21,7 +21,7 @@
           </thead>
           <tbody>
             <tr>
-              <?php $i=1; foreach ($node as $item):?>
+              <?php $i=1; foreach ($content['node'] as $item):?>
               <td><?php echo $i; ?></td>
               <td><?php echo $item->kode_node; ?></td>
               <td><?php echo $item->nama_node; ?></td>
@@ -62,7 +62,7 @@
             </thead>
             <tbody>
               <tr>
-                <?php $i=1; foreach ($user as $item):?>
+                <?php $i=1; foreach ($content['user'] as $item):?>
                 <td><?php echo $i; ?></td>
                 <td><?php echo $item->username; ?></td>
                 <td><?php echo $item->password; ?></td>
