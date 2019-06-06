@@ -58,12 +58,12 @@
               </tr>
             </thead>
             <tbody>
-              <?php $i=1; foreach ($user as $item):?>
+              <?php $i=1; foreach ($content['user'] as $item):?>
               <tr>
                   <td><?php echo $i; ?></td>
                   <td><?php echo $item->username; ?></td>
                   <td><?php echo $item->fullname; ?></td>
-                  <td><a class="btn btn-warning" href="<?php echo base_url('editUser/'.$item->id); ?>"> <i class="fa fa-file-text"></i> Edit User</a></td>
+                  <td><a class="btn btn-warning" href="<?php echo base_url('detailUser/'.$item->id); ?>"> <i class="fa fa-file-text"></i> Detail</a></td>
                 </tr>
                 <?php $i++; endforeach; ?>
 

@@ -8,71 +8,82 @@ class admin_model extends CI_Model{
   }
 
   //core
-  public function deleteData($table, $whereVar, $whereVal)
-  {
-    $where = array($whereVar => $whereval );
-    return $this->db->delete($table, $where);
-  }
 
   public function getAllData($table)
   {
     return $this->db->get($table)->result();
   }
 
-  
+  public function getSomeData($table, $whereVar, $whereVal)
+  {
+    $where = array($whereVar => $whereVal);
+    return $this->db->get_where($table, $where)->result();
+  }
+
+  public function getDataRow($table, $whereVar, $whereVal)
+  {
+    $where = array($whereVar => $whereVal);
+    return $this->db->get_where($table, $where)->row();
+  }
+
+  public function deleteData($table, $whereVar, $whereVal)
+  {
+    $where = array($whereVar => $whereVal );
+    $this->db->delete($table, $where);
+  }
+
   //functional
 
   //application
-
- public function adminValidation()
- {
-   $where = array(
-     'username' => $this->input->post('username'),
-     'password' => md5($this->input->post('password'))
-    );
-
-    return $this->db->get_where('admin',$where);
- }
-
-
-
- public function getLoggedAdmin()
- {
-   $where = array(
-     'username' => $this->input->post('username'),
-     'password' => md5($this->input->post('password'))
-    );
-
-    $query = $this->db->get_where('admin',$where);
-    return $query->row();
- }
-
-
-  public function updateAdmin()
+  public function cUser()
   {
-    $where = array('id' => $this->session->userdata['id'] );
+    $data['notification'] = "no";
+    $data['node'] = $this->getAllData('view_node');
+    $data['user'] = $this->getSomeData('account', 'previlleges', 'user');
+    $data['view_name'] = "user";
+    return $data;
+  }
+
+  public function createUser()
+  {
     $data = array(
       'username' => $this->input->post('username'),
       'password' => md5($this->input->post('password')),
-      'fullname' => $this->input->post('fullname')
+      'fullname' => $this->input->post('fullname'),
+      'previlleges'=> 'user'
     );
+    $this->db->insert('account',$data);
+  }
+
+  public function cDetailUser($id, $notification)
+  {
+    $data['node'] = $this->getAllData('view_node');
+    $data['user'] = $this->getDataRow('account', 'id', $id);
+    $data['notification'] = 'operation'.$notification;
+    $data['view_name'] = 'detailUser';
+    return $data;
+  }
+
+  public function updateUser($id)
+  {
+    if ($this->input->post('password')=='') {
+      $data = array('username' => $this->input->post('username'), 'fullname' => $this->input->post('fullname'));
+    } else {
+      $data = array('username' => $this->input->post('username'), 'password' => md5($this->input->post('password')),'fullname' => $this->input->post('fullname'));
+    }
+    $where = array('id' => $id);
     $this->db->where($where);
-    $this->db->update('admin',$data);
+    return $this->db->update('account', $data);
   }
 
-  public function getUpdatedAdmin()
+  public function deleteUser($id)
   {
-    $where = array('id' => $this->session->userdata['id']);
-    $query = $this->db->get_where('admin',$where);
-    return $query->row();
+    $this->deleteData('account', 'id', $id);
+    $this->deleteData('node', 'id_user', $id);
+    return 1;
   }
 
-  public function getNode()
-  {
-    $query = $this->db->get('view_node');
-    return $query->result();
-  }
-
+  //trash
   public function getConfCode()
   {
     $where = array('id' => 1 );
@@ -225,36 +236,8 @@ class admin_model extends CI_Model{
     return $query->row();
   }
 
-  public function updateUser($id)
-  {
-    $where = array('id' => $id );
-    $data = array(
-      'username' => $this->input->post('username'),
-      'password' => md5($this->input->post('password')),
-      'fullname' => $this->input->post('fullname')
-    );
-    $this->db->where($where);
-    $this->db->update('account',$data);
-  }
 
-  public function deleteUser($id)
-  {
-    $where = array(
-      'id' => $id
-     );
-    $this->db->delete('account',$where);
-  }
 
-  public function createUser()
-  {
-    $data = array(
-      'username' => $this->input->post('username'),
-      'password' => md5($this->input->post('password')),
-      'fullname' => $this->input->post('fullname'),
-      'previlleges'=> 'user'
-    );
-    $this->db->insert('account',$data);
-  }
 
 
 }

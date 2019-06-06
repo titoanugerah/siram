@@ -12,80 +12,23 @@ class Admin extends CI_Controller{
     redirect(base_url('adminHome'));
   }
 
-	public function adminHome()
-	{
-    $data['node'] = $this->admin_model->getNode();
-    $data['user'] = $this->admin_model->getUser();
-		$data['notification'] = "no";
-		$data['view_name'] = "adminHome";
-    $this->load->view('template',$data);
-	}
-
-	public function adminLogout()
-	{
-		$this->session->sess_destroy();
-		redirect(base_url('adminLogin'));
-	}
-
-	public function adminProfil()
-	{
-    $data['node'] = $this->admin_model->getNode();
-		$data['notification'] = 'no';
-    $data['view_name'] = 'adminProfil';
-    $this->load->view('template',$data);
-	}
-
-	public function adminEdit()
-  {
-    if ($this->input->post('updateAdmin')) {
-      $this->admin_model->updateAdmin();
-      $data['admin'] = $this->admin_model->getUpdatedAdmin();
-      $data_session = array(
-				'login' => true,
-				'id' => $data['admin']->id,
-				'username' => $data['admin']->username,
-				'password' => $data['admin']->password,
-				'fullname' => $data['admin']->fullname
-      );
-      $this->session->set_userdata($data_session);
-      $data['node'] = $this->admin_model->getNode();
-      $data['notification'] = 'dataCreateSuccess';
-      $data['view_name'] = 'adminEdit';
-      $this->load->view('template',$data);
-    } else {
-    $data['node'] = $this->admin_model->getNode();
-    $data['notification'] = 'dataCreateAlert';
-    $data['view_name'] = 'adminEdit';
-    $this->load->view('template',$data);
-    }
-  }
 
   public function user()
   {
-    $data['notification'] = "no";
+    $data['content'] = $this->admin_model->cUser();
     if ($this->input->post('createUser')) {
         $this->admin_model->createUser();
         $data['notification'] = "createUserSuccess";
     }
-    $data['node'] = $this->admin_model->getNode();
-    $data['user'] = $this->admin_model->getUser();
-    $data['view_name'] = "rekapUser";
     $this->load->view('template',$data);
   }
 
-  public function editUser($id)
+  public function detailUser($id)
   {
-    if ($this->input->post('updateUser')) {
-      $this->admin_model->updateUser($id);
-      $data['notification'] = 'dataCreateSuccess';
-    } elseif ($this->input->post('deleteUser')) {
-      $this->admin_model->deleteData('');
-      $data['notification'] = 'dataCreateSuccess';
-    }
-    $data['node'] = $this->admin_model->getNode();
-    $data['user'] = $this->admin_model->getSelectedUser($id);
-    $data['notification'] = 'dataCreateAlert';
-    $data['view_name'] = 'editUser';
+    $operation = 2;
+    if ($this->input->post('updateUser')) {$operation = $this->admin_model->updateUser($id);}
+    elseif ($this->input->post('deleteUser')) {$operation = $this->admin_model->deleteUser($id); redirect(base_url('user'));}
+    $data['content'] = $this->admin_model->cDetailUser($id, $operation);
     $this->load->view('template',$data);
 
   }
