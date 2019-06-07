@@ -127,7 +127,7 @@ class admin_model extends CI_Model{
     $data['sensor'] = $this->getAllData('sensor');
     $data['node'] = $this->getAllData('view_node');
     $data['notification'] = "no";
-    $data['view_name'] = "comodity";
+    $data['view_name'] = "detailComodity";
     return $data;
   }
 
