@@ -5,13 +5,13 @@
       <li><a href="#listSensor" data-toggle="tab"><i class="fa fa-magnet">&nbsp;</i>Daftar Sensor</a></li>
     </ul>
     <div class="tab-content">
-      <div class="active tab-pane" id="profile">
+      <div class="active tab-pane" id="detailComodity">
         <form role="form" method="post">
           <div class="box-body">
             <div class="form-group">
               <center>
-              <h3> Detail Komoditas <?php echo $content['comodity']->nama_komoditas; ?>  </h3>
-            </center>
+                <h3> Detail Komoditas <?php echo $content['comodity']->nama_komoditas; ?>  </h3>
+              </center>
             </div>
             <div class="form-group">
               <label for="">Nama Komoditas</label>
@@ -20,7 +20,7 @@
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <button type="submit" class="btn btn-primary" name="updateUser" value="updateUser">Perbaharui Komoditas</button>
+            <button type="submit" class="btn btn-primary" name="updateComodity" value="updateComodity">Perbaharui Komoditas</button>
             <a href="<?php echo base_url('comodity'); ?>" class="btn btn-warning">Kembali</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button type="submit" class="btn btn-danger" name="deleteComodity" value="deleteComodity">Hapus Komoditas</button>
@@ -28,6 +28,29 @@
         </form>
       </div>
       <div class="tab-pane" id="listSensor">
+
+        <form role="form" method="post">
+          <div class="box-body">
+            <div class="form-group">
+              <center>
+                <h3> Tambah Sensor Baru </h3>
+              </center>
+            </div>
+            <div class="form-group">
+              <label for="">Sensor Pada Komoditas</label>
+              <select name="id" class="js-example-basic-single select2" style="width: 100%;" required>
+                <?php foreach ($content['sensor'] as $item): ?>
+                  <option value="<?php echo $item->id; ?>"><?php echo ucfirst($item->nama_sensor); ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary" name="addDataset" value="addDataset">Tambahkan</button>
+          </div>
+        </form>
+
         <center>
           <h3 class="box-title">Daftar Node Terpasang</h3>
         </center>
@@ -38,19 +61,17 @@
               <tr>
                 <center>
                   <th>No</th>
-                  <th>Kode Node</th>
-                  <th>Status</th>
+                  <th>Nama Sensor</th>
                   <th>Opsi</th>
                 </center>
               </tr>
             </thead>
             <tbody>
-              <?php $i=1; foreach ($content['nodeUser'] as $item):?>
-              <tr>
-                <td><?php echo $i; ?></td>
-                <td><?php echo $item->kode_node; ?></td>
-                <td><?php if($item->status==0){ echo "Tidak Menyala";} else if($item->status==1){ echo "Menyala";}  ?></td>
-                <td><a class="btn btn-warning" href="<?php echo base_url('detailNode/'.$item->id); ?>"><i class="fa fa-list"></i> Detail Node</a></td>
+              <?php $i=1; foreach ($content['dataset'] as $item):?>
+                <tr>
+                  <td><?php echo $i; ?></td>
+                  <td><?php echo ucwords($item->nama_sensor); ?></td>
+                  <td><a class="btn btn-danger" href="<?php echo base_url('deleteDataset/'.$item->id); ?>"><i class="fa fa-close"></i>&nbsp;Hapus</a></td>
                 </tr>
                 <?php $i++; endforeach; ?>
 

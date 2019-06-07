@@ -15,7 +15,7 @@ $route['node'] = 'admin/node';
 $route['detailNode/(:any)'] = 'admin/detailNode/$1';
 $route['comodity'] = 'admin/comodity';
 $route['detailComodity/(:any)'] = 'admin/detailComodity/$1';
-
+$route['deleteDataset/(:any)'] = 'admin/deleteDataset/$1';
 //READY TO TRASH
 $route['informasiNode/(:any)'] = 'user/informasiNode/$1';
 $route['dataTanah/(:any)'] = 'user/dataTanah/$1';

@@ -51,8 +51,17 @@ class Admin extends CI_Controller{
   public function detailComodity($id)
   {
     $operation = 2;
+    if ($this->input->post('addDataset')) {$this->admin_model->addDataset($id);redirect(base_url('detailComodity/'.$id));}
+    elseif ($this->input->post('deleteComodity')) {$this->admin_model->deleteComodity($id);redirect(base_url('comodity'));}
+    elseif ($this->input->post('updateComodity')) {$this->admin_model->updateComodity($id);}
+
     $data['content'] = $this->admin_model->cDetailComodity($id);
     $this->load->view('template',$data);
+  }
+
+  public function deleteDataset($id)
+  {
+    redirect(base_url('detailComodity/'.$this->admin_model->deleteDataset($id)));
   }
 
   //trash

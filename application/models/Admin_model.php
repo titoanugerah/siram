@@ -124,6 +124,7 @@ class admin_model extends CI_Model{
   public function cDetailComodity($id)
   {
     $data['comodity'] = $this->getDataRow('komoditas', 'id', $id);
+    $data['dataset'] = $this->getSomeData('view_dataset', 'id_komoditas', $id);
     $data['sensor'] = $this->getAllData('sensor');
     $data['node'] = $this->getAllData('view_node');
     $data['notification'] = "no";
@@ -131,8 +132,33 @@ class admin_model extends CI_Model{
     return $data;
   }
 
+  public function addDataset($id)
+  {
+    $data = array('id_komoditas' => $id, 'id_sensor' => $this->input->post('id'));
+    $this->db->insert('dataset', $data);
+  }
 
+  public function deleteDataset($id)
+  {
+    $ids = $this->getDataRow('view_dataset', 'id', $id)->id_komoditas;
+    $this->deleteData('dataset', 'id', $id);
+    return $ids;
+  }
 
+  public function deleteComodity($id)
+  {
+    $this->deleteData('dataset', 'id_komoditas', $id);
+    $this->deleteData('komoditas', 'id_komoditas', $id);
+    $this->deleteData('node', 'id_komoditas', $id);
+  }
+
+  public function updateComodity($id)
+  {
+    $where = array('id' => $id );
+    $data = array('nama_komoditas' => $this->input->post('nama_komoditas'));
+    $this->db->where($where);
+    $this->db->update('komoditas', $data);
+  }
 
 
 

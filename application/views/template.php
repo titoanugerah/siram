@@ -1,8 +1,4 @@
-<?php
-if (!$this->session->userdata['login']) {
-redirect(base_url('userLogin'));
-}
-?>
+<?php if (!$this->session->userdata['login']) {redirect(base_url('login'));}?>
 
 <!DOCTYPE html>
 <html>
@@ -22,105 +18,102 @@ redirect(base_url('userLogin'));
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/AdminLTE.min.css'); ?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
+  folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/skins/_all-skins.min.css'); ?>">
   <!-- DataTables -->
-   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.css'); ?>">
-   <!-- Skins -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/skins/_all-skins.min.css'); ?>">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2/select2.min.css') ?>">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-more.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.css'); ?>">
+  <!-- Skins -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/skins/_all-skins.min.css'); ?>">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2/select2.min.css') ?>">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-more.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
 </head>
 <body class="hold-transition skin-green sidebar-mini">
-<!--disini-->
-<div class="wrapper">
+  <!--disini-->
+  <div class="wrapper">
 
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="#" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>S</b>R</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>SI</b>RAM</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
+    <header class="main-header">
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>S</b>R</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>SI</b>RAM</span>
       </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
 
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
 
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="<?php echo base_url('./assets/dist/img/user2-160x160.jpg'); ?>" class="img-circle" alt="User Image">
+          </ul>
         </div>
-        <div class="pull-left info">
-          <p><?php echo $this->session->userdata['fullname']; ?></p>
-          <p>@<?php echo $this->session->userdata['username']; ?></p>
-          <br>
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img src="<?php echo base_url('./assets/dist/img/user2-160x160.jpg'); ?>" class="img-circle" alt="User Image">
+          </div>
+          <div class="pull-left info">
+            <p><?php echo $this->session->userdata['fullname']; ?></p>
+            <p>@<?php echo $this->session->userdata['username']; ?></p>
+            <br>
 
+          </div>
         </div>
-      </div>
-      <!-- search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <?php $this->load->view($this->session->userdata['previlleges'].'/menu');?>
+        <!-- search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <?php $this->load->view($this->session->userdata['previlleges'].'/menu');?>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
 
 
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+      <!-- Main content -->
+      <section class="content">
+        <!-- Small boxes (Stat box) -->
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+        <!-- /.row -->
+        <?php $this->load->view('notification/'.$content['notification']); ?>
+        <?php $this->load->view($this->session->userdata['previlleges'].'/'.$content['view_name']); ?>
 
+        <!-- Main row -->
 
-    <!-- Main content -->
-    <section class="content">
-      <!-- Small boxes (Stat box) -->
+        <!-- /.row (main row) -->
 
-      <!-- /.row -->
-      <?php $this->load->view('notification/'.$content['notification']); ?>
-      <?php $this->load->view($this->session->userdata['previlleges'].'/'.$content['view_name']); ?>
-
-      <!-- Main row -->
-
-      <!-- /.row (main row) -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.4.0
+      </section>
+      <!-- /.content -->
     </div>
-    <strong>Copyright &copy; 2017 <a href="#">Lab Software</a>.</strong> All rights
-    reserved.
-  </footer>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 1.4.0
+      </div>
+      <strong>Copyright &copy; 2017 <a href="#">Lab Software</a>.</strong> All rights
+      reserved.
+    </footer>
 
-  <!-- Control Sidebar -->
+    <!-- Control Sidebar -->
 
-</div>
-<!-- ./wrapper -->
+  </div>
+  <!-- ./wrapper -->
 
   <!-- jQuery 2.2.3 -->
   <script src="<?php echo base_url('assets/plugins/jQuery/jquery-2.2.3.min.js'); ?>"></script>
@@ -135,35 +128,35 @@ redirect(base_url('userLogin'));
   <!-- AdminLTE App -->
   <script src="<?php echo base_url('assets/dist/js/app.min.js'); ?>"></script>
   <!-- DataTables -->
- <script src="<?php echo base_url('assets/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
- <script src="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.min.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.min.js'); ?>"></script>
 
 
- <!-- FLOT CHARTS -->
- <script src="<?php echo base_url('./assets/plugins/flot/jquery.flot.min.js'); ?>"></script>
+  <!-- FLOT CHARTS -->
+  <script src="<?php echo base_url('./assets/plugins/flot/jquery.flot.min.js'); ?>"></script>
 
- <script src="<?php echo base_url('./assets/plugins/flot/jquery.flot.min.js'); ?>"></script>
- <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
- <script src="<?php echo base_url('./assets/plugins/flot/jquery.flot.resize.min.js'); ?>"></script>
- <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
- <script src="<?php echo base_url('./assets/plugins/flot/jquery.flot.pie.min.js'); ?>"></script>
- <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
- <script src="<?php echo base_url('./assets/plugins/flot/jquery.flot.categories.min.js'); ?>"></script>
- <!-- Page script -->
+  <script src="<?php echo base_url('./assets/plugins/flot/jquery.flot.min.js'); ?>"></script>
+  <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+  <script src="<?php echo base_url('./assets/plugins/flot/jquery.flot.resize.min.js'); ?>"></script>
+  <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+  <script src="<?php echo base_url('./assets/plugins/flot/jquery.flot.pie.min.js'); ?>"></script>
+  <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+  <script src="<?php echo base_url('./assets/plugins/flot/jquery.flot.categories.min.js'); ?>"></script>
+  <!-- Page script -->
 
- <!-- ChartJS 1.0.1 -->
- <script src="<?php echo base_url('./assets/plugins/chartjs/Chart.min.js'); ?>"></script>
+  <!-- ChartJS 1.0.1 -->
+  <script src="<?php echo base_url('./assets/plugins/chartjs/Chart.min.js'); ?>"></script>
 
 
- <script>
-   $(function () {
-     /* ChartJS
+  <script>
+    $(function () {
+      /* ChartJS
       * -------
       * Here we will create a few charts using ChartJS
       */
       <?php //echo $chart;
       if(!empty($dataNode)){
-      foreach ($dataNode as $item):
+        foreach ($dataNode as $item):
         $id[] = $item->id;
         if ($view_name=='suhu') {
           $devPoint[] = $item->data_value;
@@ -176,225 +169,225 @@ redirect(base_url('userLogin'));
         } else {
           $devPoint[] = $item->data;
         }
-      endforeach;
+        endforeach;
       }
       //print_r($devPoint);
       //die();
-       ?>
-     //--------------
-     //- AREA CHART -
-     //--------------
+      ?>
+      //--------------
+      //- AREA CHART -
+      //--------------
 
-     // Get context with jQuery - using jQuery's .get() method.
-     //var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
-     <?php
-     if (!empty($devPoint)) {
-     ?>
-     $("#example1").DataTable();
-     $('#example2').DataTable({
-       "paging": true,
-       "lengthChange": false,
-       "searching": true,
-       "ordering": true,
-       "info": true,
-       "autoWidth": true
-     });
-     var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
-     // This will get the first returned node in the jQuery collection.
-     var areaChart = new Chart(areaChartCanvas);
+      // Get context with jQuery - using jQuery's .get() method.
+      //var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
+      <?php
+      if (!empty($devPoint)) {
+        ?>
+        $("#example1").DataTable();
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": true
+        });
+        var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
+        // This will get the first returned node in the jQuery collection.
+        var areaChart = new Chart(areaChartCanvas);
 
 
-     var areaChartData = {
+        var areaChartData = {
 
-       labels: <?php echo json_encode($id); ?>,
-       datasets: [
-         {
-           label: "dewPoint",
-           fillColor: "rgba(210, 214, 222, 1)",
-           strokeColor: "rgba(210, 214, 222, 1)",
-           pointColor: "rgba(210, 214, 222, 1)",
-           pointStrokeColor: "#c1c7d1",
-           pointHighlightFill: "#fff",
-           pointHighlightStroke: "rgba(220,220,220,1)",
-           data: <?php echo json_encode($devPoint)?>
-         }
-       ]
-     };
+          labels: <?php echo json_encode($id); ?>,
+          datasets: [
+          {
+            label: "dewPoint",
+            fillColor: "rgba(210, 214, 222, 1)",
+            strokeColor: "rgba(210, 214, 222, 1)",
+            pointColor: "rgba(210, 214, 222, 1)",
+            pointStrokeColor: "#c1c7d1",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: <?php echo json_encode($devPoint)?>
+          }
+          ]
+        };
 
-     var areaChartOptions = {
-       //Boolean - If we should show the scale at all
-       showScale: true,
-       //Boolean - Whether grid lines are shown across the chart
-       scaleShowGridLines: false,
-       //String - Colour of the grid lines
-       scaleGridLineColor: "rgba(0,0,0,.05)",
-       //Number - Width of the grid lines
-       scaleGridLineWidth: 1,
-       //Boolean - Whether to show horizontal lines (except X axis)
-       scaleShowHorizontalLines: true,
-       //Boolean - Whether to show vertical lines (except Y axis)
-       scaleShowVerticalLines: true,
-       //Boolean - Whether the line is curved between points
-       bezierCurve: true,
-       //Number - Tension of the bezier curve between points
-       bezierCurveTension: 0.3,
-       //Boolean - Whether to show a dot for each point
-       pointDot: false,
-       //Number - Radius of each point dot in pixels
-       pointDotRadius: 4,
-       //Number - Pixel width of point dot stroke
-       pointDotStrokeWidth: 1,
-       //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-       pointHitDetectionRadius: 20,
-       //Boolean - Whether to show a stroke for datasets
-       datasetStroke: true,
-       //Number - Pixel width of dataset stroke
-       datasetStrokeWidth: 2,
-       //Boolean - Whether to fill the dataset with a color
-       datasetFill: true,
-       //String - A legend template
-       legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
-       //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-       maintainAspectRatio: true,
-       //Boolean - whether to make the chart responsive to window resizing
-       responsive: true
-     };
+        var areaChartOptions = {
+          //Boolean - If we should show the scale at all
+          showScale: true,
+          //Boolean - Whether grid lines are shown across the chart
+          scaleShowGridLines: false,
+          //String - Colour of the grid lines
+          scaleGridLineColor: "rgba(0,0,0,.05)",
+          //Number - Width of the grid lines
+          scaleGridLineWidth: 1,
+          //Boolean - Whether to show horizontal lines (except X axis)
+          scaleShowHorizontalLines: true,
+          //Boolean - Whether to show vertical lines (except Y axis)
+          scaleShowVerticalLines: true,
+          //Boolean - Whether the line is curved between points
+          bezierCurve: true,
+          //Number - Tension of the bezier curve between points
+          bezierCurveTension: 0.3,
+          //Boolean - Whether to show a dot for each point
+          pointDot: false,
+          //Number - Radius of each point dot in pixels
+          pointDotRadius: 4,
+          //Number - Pixel width of point dot stroke
+          pointDotStrokeWidth: 1,
+          //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+          pointHitDetectionRadius: 20,
+          //Boolean - Whether to show a stroke for datasets
+          datasetStroke: true,
+          //Number - Pixel width of dataset stroke
+          datasetStrokeWidth: 2,
+          //Boolean - Whether to fill the dataset with a color
+          datasetFill: true,
+          //String - A legend template
+          legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+          //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+          maintainAspectRatio: true,
+          //Boolean - whether to make the chart responsive to window resizing
+          responsive: true
+        };
 
-     //Create the line chart
-     areaChart.Line(areaChartData, areaChartOptions);
+        //Create the line chart
+        areaChart.Line(areaChartData, areaChartOptions);
 
-     //-------------
-     //- LINE CHART -
-     //--------------
-     // var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
-     // var lineChart = new Chart(lineChartCanvas);
-     // var lineChartOptions = areaChartOptions;
-     // lineChartOptions.datasetFill = false;
-     // lineChart.Line(areaChartData, lineChartOptions);
+        //-------------
+        //- LINE CHART -
+        //--------------
+        // var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+        // var lineChart = new Chart(lineChartCanvas);
+        // var lineChartOptions = areaChartOptions;
+        // lineChartOptions.datasetFill = false;
+        // lineChart.Line(areaChartData, lineChartOptions);
 
-     //-------------
-     //- PIE CHART -
-     //-------------
-     // Get context with jQuery - using jQuery's .get() method.
-     // var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-     // var pieChart = new Chart(pieChartCanvas);
-     // var PieData = [
-     //   {
-     //     value: 700,
-     //     color: "#f56954",
-     //     highlight: "#f56954",
-     //     label: "Chrome"
-     //   },
-     //   {
-     //     value: 500,
-     //     color: "#00a65a",
-     //     highlight: "#00a65a",
-     //     label: "IE"
-     //   },
-     //   {
-     //     value: 400,
-     //     color: "#f39c12",
-     //     highlight: "#f39c12",
-     //     label: "FireFox"
-     //   },
-     //   {
-     //     value: 600,
-     //     color: "#00c0ef",
-     //     highlight: "#00c0ef",
-     //     label: "Safari"
-     //   },
-     //   {
-     //     value: 300,
-     //     color: "#3c8dbc",
-     //     highlight: "#3c8dbc",
-     //     label: "Opera"
-     //   },
-     //   {
-     //     value: 100,
-     //     color: "#d2d6de",
-     //     highlight: "#d2d6de",
-     //     label: "Navigator"
-     //   }
-     // ];
-     // var pieOptions = {
-     //   //Boolean - Whether we should show a stroke on each segment
-     //   segmentShowStroke: true,
-     //   //String - The colour of each segment stroke
-     //   segmentStrokeColor: "#fff",
-     //   //Number - The width of each segment stroke
-     //   segmentStrokeWidth: 2,
-     //   //Number - The percentage of the chart that we cut out of the middle
-     //   percentageInnerCutout: 50, // This is 0 for Pie charts
-     //   //Number - Amount of animation steps
-     //   animationSteps: 100,
-     //   //String - Animation easing effect
-     //   animationEasing: "easeOutBounce",
-     //   //Boolean - Whether we animate the rotation of the Doughnut
-     //   animateRotate: true,
-     //   //Boolean - Whether we animate scaling the Doughnut from the centre
-     //   animateScale: false,
-     //   //Boolean - whether to make the chart responsive to window resizing
-     //   responsive: true,
-     //   // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-     //   maintainAspectRatio: true,
-     //   //String - A legend template
-     //   legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-     // };
-     // //Create pie or douhnut chart
-     // // You can switch between pie and douhnut using the method below.
-     // pieChart.Doughnut(PieData, pieOptions);
+        //-------------
+        //- PIE CHART -
+        //-------------
+        // Get context with jQuery - using jQuery's .get() method.
+        // var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+        // var pieChart = new Chart(pieChartCanvas);
+        // var PieData = [
+        //   {
+        //     value: 700,
+        //     color: "#f56954",
+        //     highlight: "#f56954",
+        //     label: "Chrome"
+        //   },
+        //   {
+        //     value: 500,
+        //     color: "#00a65a",
+        //     highlight: "#00a65a",
+        //     label: "IE"
+        //   },
+        //   {
+        //     value: 400,
+        //     color: "#f39c12",
+        //     highlight: "#f39c12",
+        //     label: "FireFox"
+        //   },
+        //   {
+        //     value: 600,
+        //     color: "#00c0ef",
+        //     highlight: "#00c0ef",
+        //     label: "Safari"
+        //   },
+        //   {
+        //     value: 300,
+        //     color: "#3c8dbc",
+        //     highlight: "#3c8dbc",
+        //     label: "Opera"
+        //   },
+        //   {
+        //     value: 100,
+        //     color: "#d2d6de",
+        //     highlight: "#d2d6de",
+        //     label: "Navigator"
+        //   }
+        // ];
+        // var pieOptions = {
+        //   //Boolean - Whether we should show a stroke on each segment
+        //   segmentShowStroke: true,
+        //   //String - The colour of each segment stroke
+        //   segmentStrokeColor: "#fff",
+        //   //Number - The width of each segment stroke
+        //   segmentStrokeWidth: 2,
+        //   //Number - The percentage of the chart that we cut out of the middle
+        //   percentageInnerCutout: 50, // This is 0 for Pie charts
+        //   //Number - Amount of animation steps
+        //   animationSteps: 100,
+        //   //String - Animation easing effect
+        //   animationEasing: "easeOutBounce",
+        //   //Boolean - Whether we animate the rotation of the Doughnut
+        //   animateRotate: true,
+        //   //Boolean - Whether we animate scaling the Doughnut from the centre
+        //   animateScale: false,
+        //   //Boolean - whether to make the chart responsive to window resizing
+        //   responsive: true,
+        //   // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+        //   maintainAspectRatio: true,
+        //   //String - A legend template
+        //   legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+        // };
+        // //Create pie or douhnut chart
+        // // You can switch between pie and douhnut using the method below.
+        // pieChart.Doughnut(PieData, pieOptions);
 
-     //-------------
-     //- BAR CHART -
-     //-------------
-     // var barChartCanvas = $("#barChart").get(0).getContext("2d");
-     // var barChart = new Chart(barChartCanvas);
-     // var barChartData = areaChartData;
-     // barChartData.datasets[1].fillColor = "#00a65a";
-     // barChartData.datasets[1].strokeColor = "#00a65a";
-     // barChartData.datasets[1].pointColor = "#00a65a";
-     // var barChartOptions = {
-     //   //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-     //   scaleBeginAtZero: true,
-     //   //Boolean - Whether grid lines are shown across the chart
-     //   scaleShowGridLines: true,
-     //   //String - Colour of the grid lines
-     //   scaleGridLineColor: "rgba(0,0,0,.05)",
-     //   //Number - Width of the grid lines
-     //   scaleGridLineWidth: 1,
-     //   //Boolean - Whether to show horizontal lines (except X axis)
-     //   scaleShowHorizontalLines: true,
-     //   //Boolean - Whether to show vertical lines (except Y axis)
-     //   scaleShowVerticalLines: true,
-     //   //Boolean - If there is a stroke on each bar
-     //   barShowStroke: true,
-     //   //Number - Pixel width of the bar stroke
-     //   barStrokeWidth: 2,
-     //   //Number - Spacing between each of the X value sets
-     //   barValueSpacing: 5,
-     //   //Number - Spacing between data sets within X values
-     //   barDatasetSpacing: 1,
-     //   //String - A legend template
-     //   legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
-     //   //Boolean - whether to make the chart responsive
-     //   responsive: true,
-     //   maintainAspectRatio: true
-     // };
+        //-------------
+        //- BAR CHART -
+        //-------------
+        // var barChartCanvas = $("#barChart").get(0).getContext("2d");
+        // var barChart = new Chart(barChartCanvas);
+        // var barChartData = areaChartData;
+        // barChartData.datasets[1].fillColor = "#00a65a";
+        // barChartData.datasets[1].strokeColor = "#00a65a";
+        // barChartData.datasets[1].pointColor = "#00a65a";
+        // var barChartOptions = {
+        //   //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+        //   scaleBeginAtZero: true,
+        //   //Boolean - Whether grid lines are shown across the chart
+        //   scaleShowGridLines: true,
+        //   //String - Colour of the grid lines
+        //   scaleGridLineColor: "rgba(0,0,0,.05)",
+        //   //Number - Width of the grid lines
+        //   scaleGridLineWidth: 1,
+        //   //Boolean - Whether to show horizontal lines (except X axis)
+        //   scaleShowHorizontalLines: true,
+        //   //Boolean - Whether to show vertical lines (except Y axis)
+        //   scaleShowVerticalLines: true,
+        //   //Boolean - If there is a stroke on each bar
+        //   barShowStroke: true,
+        //   //Number - Pixel width of the bar stroke
+        //   barStrokeWidth: 2,
+        //   //Number - Spacing between each of the X value sets
+        //   barValueSpacing: 5,
+        //   //Number - Spacing between data sets within X values
+        //   barDatasetSpacing: 1,
+        //   //String - A legend template
+        //   legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+        //   //Boolean - whether to make the chart responsive
+        //   responsive: true,
+        //   maintainAspectRatio: true
+        // };
 
-     // barChartOptions.datasetFill = false;
-     // barChart.Bar(barChartData, barChartOptions);
-     <?php
-     }
-     ?>
-   });
- </script>
+        // barChartOptions.datasetFill = false;
+        // barChart.Bar(barChartData, barChartOptions);
+        <?php
+      }
+      ?>
+    });
+  </script>
 
- <script type="text/javascript">
- $(document).ready(function() {
-     $('.js-example-basic-single').select2();
- });
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.js-example-basic-single').select2();
+    });
   </script>
 
 
- </body>
- </html>
+</body>
+</html>
