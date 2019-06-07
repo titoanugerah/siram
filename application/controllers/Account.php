@@ -11,7 +11,12 @@ class Account extends CI_Controller {
 
 	public function index()
 	{
-		//test purpose
+		error_reporting(0);
+		if ($this->session->userdata['login']) {
+			$this->dashboard();
+		} else{
+			$this->login();
+		}
 	}
 
 	public function login()

@@ -18,7 +18,7 @@ class Admin extends CI_Controller{
     $data['content'] = $this->admin_model->cUser();
     if ($this->input->post('createUser')) {
       $this->admin_model->createUser();
-      $data['notification'] = "createUserSuccess";
+      $data['content'] = $this->admin_model->cUser();
     }
     $this->load->view('template',$data);
   }
@@ -30,24 +30,32 @@ class Admin extends CI_Controller{
     elseif ($this->input->post('deleteUser')) {$operation = $this->admin_model->deleteUser($id); redirect(base_url('user'));}
     $data['content'] = $this->admin_model->cDetailUser($id, $operation);
     $this->load->view('template',$data);
-
   }
 
   public function node()
   {
     $operation = 2;
+    if ($this->input->post('createNode')) {$this->admin_model->createNode();}
     $data['content'] = $this->admin_model->cNode();
-    $this->load->view('template',$data);    
+    $this->load->view('template',$data);
   }
 
+
+  public function comodity()
+  {
+    $operation = 2;
+    $data['content'] = $this->admin_model->cComodity();
+    $this->load->view('template',$data);
+  }
+
+  public function detailComodity($id)
+  {
+    $operation = 2;
+    $data['content'] = $this->admin_model->cDetailComodity($id);
+    $this->load->view('template',$data);
+  }
 
   //trash
-
-  public function deleteUser($id)
-  {
-    $this->admin_model->deleteUser($id);
-    redirect(base_url('adminHome'));
-  }
 
   public function detailNode($id){
     if ($this->input->post('switchON')) {
@@ -71,14 +79,6 @@ class Admin extends CI_Controller{
     $data['notification'] = 'nodeNotification';
     $this->load->view('template',$data);
     }
-  }
-
-  public function rekapNode()
-  {
-    $data['node'] = $this->admin_model->getNode();
-    $data['notification'] = "no";
-    $data['view_name'] = "rekapNode";
-    $this->load->view('template',$data);
   }
 
   public function editNode($id)

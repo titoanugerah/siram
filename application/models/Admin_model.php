@@ -58,6 +58,7 @@ class admin_model extends CI_Model{
   public function cDetailUser($id, $notification)
   {
     $data['node'] = $this->getAllData('view_node');
+    $data['nodeUser'] = $this->getSomeData('view_node','id_user',$id);
     $data['user'] = $this->getDataRow('account', 'id', $id);
     $data['notification'] = 'operation'.$notification;
     $data['view_name'] = 'detailUser';
@@ -85,11 +86,52 @@ class admin_model extends CI_Model{
 
   public function cNode()
   {
+    $data['komoditas'] = $this->getAllData('komoditas');
+    $data['user'] = $this->getSomeData('account','previlleges', 'user');
     $data['node'] = $this->getAllData('view_node');
     $data['notification'] = "no";
     $data['view_name'] = "rekapNode";
     return $data;
   }
+
+  public function createNode()
+  {
+    $data = array(
+      'nama_node' => $this->input->post('nama_node'),
+      'id_komoditas'=> $this->input->post('id_komoditas'),
+      'id_user' => $this->input->post('id_user'),
+      'status'=> 0
+    );
+    if ($this->db->insert('node',$data)) {
+      $this->createNodeConf($this->db->insert_id());
+    }
+  }
+
+  public function createNodeConf($id)
+  {
+    // code...
+  }
+
+  public function cComodity()
+  {
+    $data['comodity'] = $this->getAllData('komoditas');
+    $data['node'] = $this->getAllData('view_node');
+    $data['notification'] = "no";
+    $data['view_name'] = "comodity";
+    return $data;
+  }
+
+  public function cDetailComodity($id)
+  {
+    $data['comodity'] = $this->getDataRow('komoditas', 'id', $id);
+    $data['sensor'] = $this->getAllData('sensor');
+    $data['node'] = $this->getAllData('view_node');
+    $data['notification'] = "no";
+    $data['view_name'] = "comodity";
+    return $data;
+  }
+
+
 
 
 
@@ -116,7 +158,7 @@ class admin_model extends CI_Model{
     return $query->row();
   }
 
-  public function createNodeConf($newKodeNode,$newIdNode,$code1,$code2,$code3,$code4,$code5,$code6,$code7,$code8,$code9)
+  public function createNodeConf1($newKodeNode,$newIdNode,$code1,$code2,$code3,$code4,$code5,$code6,$code7,$code8,$code9)
   {
     $dataWrite = $code1.$newIdNode.$code2.$newKodeNode.$code3.$newIdNode.$code4.$newKodeNode.$code5.$newIdNode.$code6.$newKodeNode.$code7.$newIdNode.$code8.$newKodeNode.$code9;
     if ( ! write_file("e:/htdocs/siram/assets/Node Configuration/nodeConf".$newIdNode.".php", $dataWrite))
@@ -222,16 +264,6 @@ class admin_model extends CI_Model{
      //$query = $this->db->get_where('udara',$where);
     $query = $this->db->query("SELECT * FROM data WHERE kode_node = '$id' AND topik LIKE '%udara%'");
     return $query->result();
-  }
-
-  public function createNode()
-  {
-    $data = array(
-      'nama_node' => $this->input->post('nama_node'),
-      'id_komoditas'=> $this->input->post('id_komoditas'),
-      'status'=> 0
-    );
-    $this->db->insert('node',$data);
   }
 
   public function getUser()

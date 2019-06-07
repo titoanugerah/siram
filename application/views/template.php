@@ -27,7 +27,14 @@ redirect(base_url('userLogin'));
   <!-- DataTables -->
    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/datatables/dataTables.bootstrap.css'); ?>">
    <!-- Skins -->
-   <!-- <link rel="stylesheet" href="<?php echo base_url('assets/adminlte/dist/css/skins/_all-skins.min.css'); ?>"> -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/skins/_all-skins.min.css'); ?>">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2/select2.min.css') ?>">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
 </head>
 <body class="hold-transition skin-green sidebar-mini">
@@ -119,6 +126,8 @@ redirect(base_url('userLogin'));
   <script src="<?php echo base_url('assets/plugins/jQuery/jquery-2.2.3.min.js'); ?>"></script>
   <!-- Bootstrap 3.3.6 -->
   <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
+  <!-- Select2 -->
+  <script src="<?php echo base_url('assets/plugins/select2/select2.full.min.js'); ?>"></script>
   <!-- SlimScroll -->
   <script src="<?php echo base_url('assets/plugins/slimScroll/jquery.slimscroll.min.js'); ?>"></script>
   <!-- FastClick -->
@@ -144,6 +153,7 @@ redirect(base_url('userLogin'));
 
  <!-- ChartJS 1.0.1 -->
  <script src="<?php echo base_url('./assets/plugins/chartjs/Chart.min.js'); ?>"></script>
+
 
  <script>
    $(function () {
@@ -378,6 +388,13 @@ redirect(base_url('userLogin'));
      ?>
    });
  </script>
+
+ <script type="text/javascript">
+ $(document).ready(function() {
+     $('.js-example-basic-single').select2();
+ });
+  </script>
+
 
  </body>
  </html>
