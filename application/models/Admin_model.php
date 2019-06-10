@@ -32,6 +32,15 @@ class admin_model extends CI_Model{
     $this->db->delete($table, $where);
   }
 
+  public function updateData($table, $whereVar, $whereVal, $setVar, $setVal)
+  {
+    $where = array($whereVar => $whereVal );
+    $data = array($setVar => $setVal );
+    $this->db->where($where);
+    $this->db->update($table, $data);
+  }
+
+
   //functional
 
   //application
@@ -107,11 +116,6 @@ class admin_model extends CI_Model{
     }
   }
 
-  public function createNodeConf($id)
-  {
-    // code...
-  }
-
   public function cComodity()
   {
     $data['comodity'] = $this->getAllData('komoditas');
@@ -119,6 +123,13 @@ class admin_model extends CI_Model{
     $data['notification'] = "no";
     $data['view_name'] = "comodity";
     return $data;
+  }
+
+  public function createComodity()
+  {
+    $data = array('nama_komoditas' => ucfirst($this->input->post('nama_komoditas')), 'kode_komoditas' =>  ucfirst($this->input->post('nama_komoditas')[0]).'-01');
+    $this->db->insert('komoditas', $data);
+    return $this->db->insert_id();
   }
 
   public function cDetailComodity($id)
@@ -148,7 +159,7 @@ class admin_model extends CI_Model{
   public function deleteComodity($id)
   {
     $this->deleteData('dataset', 'id_komoditas', $id);
-    $this->deleteData('komoditas', 'id_komoditas', $id);
+    $this->deleteData('komoditas', 'id', $id);
     $this->deleteData('node', 'id_komoditas', $id);
   }
 
@@ -159,6 +170,55 @@ class admin_model extends CI_Model{
     $this->db->where($where);
     $this->db->update('komoditas', $data);
   }
+
+  public function cDetailNode($id)
+  {
+    $data['detail'] = $this->getDataRow('view_node', 'id', $id);
+    $data['node'] = $this->getAllData('view_node');
+    $data['komoditas'] = $this->getAllData('komoditas');
+    $data['dataset'] = $this->getSomeData('view_dataset', 'id_komoditas', $data['detail']->id_komoditas);
+    $data['notification'] = "no";
+    $data['view_name'] = "detailNode";
+    return $data;
+  }
+
+  public function updateNode($id)
+  {
+    $this->updateData('node', 'id', $id, 'nama_node', $this->input->post('nama_node'));
+    $this->updateData('node', 'id', $id, 'id_komoditas', $this->input->post('id_komoditas'));
+  }
+
+  public function turnNode($id)
+  {
+    $this->updateData('node', 'id', $id, 'status', !$this->getDataRow('node', 'id', $id)->status);
+  }
+
+  public function deleteNode($id)
+  {
+    $this->deleteData('node', 'id', $id);
+    $this->deleteData('data', 'id_node', $id);
+  }
+
+  public function downloadConf($id)
+  {
+    $node = $this->getDataRow('view_node', 'id', $id);
+    $code = $this->getDataRow('nodecode', 'id', 1);
+    $dataset = '';
+    foreach ($this->getSomeData('view_dataset', 'id_komoditas', $node->id_komoditas) as $item) {
+      $dataset = $dataset.' if ($message->topic=="/data2/'.$item->nama_sensor.$node->id.'")  {
+        $sql = "INSERT INTO t_suhu (topik, suhu, waktu, kode_tanaman)
+        VALUES ($message->topic, $message->payload, NOW(), "'.$node->kode_node.'");} ';
+    }
+    $dataWrite = $code->code1.$dataset.$code->code2;
+    $this->load->helper('download');
+    force_download('nodeConf'.$node->id.'.php',$dataWrite);
+  }
+
+
+
+
+
+
 
 
 
@@ -232,7 +292,7 @@ class admin_model extends CI_Model{
   }
 
 
-  public function updateNode($id)
+  public function updateNode1($id)
   {
     $where = array('id' => $id );
     $data = array(
@@ -243,13 +303,7 @@ class admin_model extends CI_Model{
     $this->db->update('node',$data);
   }
 
-  public function deleteNode($id)
-  {
-    $where = array(
-      'id' => $id
-     );
-    $this->db->delete('node',$where);
-  }
+
 
   public function getDataTanah($id)
   {

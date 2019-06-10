@@ -44,6 +44,7 @@ class Admin extends CI_Controller{
   public function comodity()
   {
     $operation = 2;
+    if($this->input->post('createComodity')){redirect(base_url('detailComodity/'.$this->admin_model->createComodity()));}
     $data['content'] = $this->admin_model->cComodity();
     $this->load->view('template',$data);
   }
@@ -54,7 +55,6 @@ class Admin extends CI_Controller{
     if ($this->input->post('addDataset')) {$this->admin_model->addDataset($id);redirect(base_url('detailComodity/'.$id));}
     elseif ($this->input->post('deleteComodity')) {$this->admin_model->deleteComodity($id);redirect(base_url('comodity'));}
     elseif ($this->input->post('updateComodity')) {$this->admin_model->updateComodity($id);}
-
     $data['content'] = $this->admin_model->cDetailComodity($id);
     $this->load->view('template',$data);
   }
@@ -64,32 +64,18 @@ class Admin extends CI_Controller{
     redirect(base_url('detailComodity/'.$this->admin_model->deleteDataset($id)));
   }
 
-  //trash
+  public function detailNode($id)
+  {
+    if ($this->input->post('updateNode')) { $this->admin_model->updateNode($id);}
+    elseif ($this->input->post('turn')) {$this->admin_model->turnNode($id);}
+    elseif ($this->input->post('deleteNode')) {$this->admin_model->deleteNode($id);redirect(base_url('node'));}
+    elseif ($this->input->post('downloadConf')) {$this->admin_model->downloadConf($id);}
 
-  public function detailNode($id){
-    if ($this->input->post('switchON')) {
-      $this->admin_model->switchON($id);
-      $data['node'] = $this->admin_model->getNode();
-      $data['info'] = $this->admin_model->getNodeInfo($id);
-      $data['view_name'] = "node";
-      $data['notification'] = 'switchON';
-      $this->load->view('template',$data);
-    } else if ($this->input->post('switchOFF')) {
-      $this->admin_model->switchOFF($id);
-      $data['node'] = $this->admin_model->getNode();
-      $data['info'] = $this->admin_model->getNodeInfo($id);
-      $data['view_name'] = "node";
-      $data['notification'] = 'switchOFF';
-      $this->load->view('template',$data);
-    } else {
-    $data['node'] = $this->admin_model->getNode();
-    $data['info'] = $this->admin_model->getNodeInfo($id);
-    $data['view_name'] = "node";
-    $data['notification'] = 'nodeNotification';
-    $this->load->view('template',$data);
-    }
+    $data['content'] = $this->admin_model->cDetailNode($id);
+    $this->load->view('template', $data);
   }
 
+  //trash
   public function editNode($id)
   {
     if ($this->input->post('updateNode')) {
@@ -132,12 +118,6 @@ class Admin extends CI_Controller{
       $data['notification'] = 'dataCreateAlert';
       $this->load->view('template',$data);
     }
-  }
-
-  public function deleteNode($id)
-  {
-    $this->admin_model->deleteNode($id);
-    redirect(base_url('adminHome'));
   }
 
   public function tanah($id)
