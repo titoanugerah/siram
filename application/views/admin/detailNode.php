@@ -49,6 +49,11 @@
           </div>
         </form>
       </div>
+      <?php foreach ($content['dataset'] as $item): ?>
+        <div class="active tab-pane" id="<?php echo $item->nama_sensor ?>">
+          hiya <?php echo $item->nama_sensor; ?>
+        </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </div>
