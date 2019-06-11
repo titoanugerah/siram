@@ -6,129 +6,62 @@ class User_model extends CI_Model{
     $this->load->database();
   }
 
- public function loginValidation()
- {
-   $where = array(
-     'username' => $this->input->post('username'),
-     'password' => md5($this->input->post('password'))
-    );
+  //CORE
 
-    return $this->db->get_where('account',$where);
- }
-
- public function getLoggedAccount()
- {
-   $where = array(
-     'username' => $this->input->post('username'),
-     'password' => md5($this->input->post('password'))
-    );
-
-    $query = $this->db->get_where('account',$where);
-    return $query->row();
-
- }
-
- public function userCreate()
- {
-   $data = array(
-     'username' => $this->input->post('username'),
-     'password' => md5($this->input->post('password')),
-     'fullname' => $this->input->post('fullname')
-   );
-   $this->db->insert('user',$data);
- }
-
- public function getNode()
- {
-   $query = $this->db->get('view_node');
-   return $query->result();
- }
-
- public function getNodeInfo($id)
- {
-   $where = array('id' => $id );
-   $query = $this->db->get_where('view_node',$where);
-   return $query->row();
- }
-
- public function getNodeInfoByKode($id)
- {
-   $where = array('kode_node' => $id );
-   $query = $this->db->get_where('view_node',$where,'desc');
-   return $query->row();
- }
-
- public function switchON($id)
- {
-   $where = array('id' => $id );
-   $data = array(
-     'status' => 1
-   );
-   $this->db->where($where);
-   $this->db->update('node',$data);
- }
-
- public function switchOFF($id)
- {
-   $where = array('id' => $id );
-   $data = array(
-     'status' => 0
-   );
-   $this->db->where($where);
-   $this->db->update('node',$data);
- }
-
- public function getDataTanah($id)
- {
-   // $where = array('kode_node' => $id );
-   // $query = $this->db->get_where('tanah',$where);
-   $query = $this->db->query("SELECT * FROM data WHERE kode_node = '$id' AND topik LIKE '%tanah%'");
-   return $query->result();
- }
-
- public function getDataSuhu($id)
- {
-   //$where = array('kode_node' => $id );
-   //$query = $this->db->get_where('suhu',$where);
-   $query = $this->db->query("SELECT * FROM data WHERE kode_node = '$id' AND topik LIKE '%suhu%'");
-   return $query->result();
- }
-
- public function getDataDewPoint($id)
- {
-   //$where = array('kode_node' => $id );
-   //$query = $this->db->get_where('dewpoint',$where);
-   $query = $this->db->query("SELECT * FROM data WHERE kode_node = '$id' AND topik LIKE '%dew%'");
-   return $query->result();
- }
-
- public function getDataUdara($id)
- {
-   //$where = array('kode_node' => $id );
-   //$query = $this->db->get_where('udara',$where);
-   $query = $this->db->query("SELECT * FROM data WHERE kode_node = '$id' AND topik LIKE '%udara%'");
-   return $query->result();
- }
-
-
-  public function updateAkun()
+  public function getAllData($table)
   {
-    $where = array('id' => $this->session->userdata['id'] );
-    $data = array(
-      'username' => $this->input->post('username'),
-      'password' => md5($this->input->post('password')),
-      'fullname' => $this->input->post('fullname')
-    );
-    $this->db->where($where);
-    $this->db->update('user',$data);
+    return $this->db->get($table)->result();
   }
 
-  public function getUpdatedUser()
+  public function getSomeData($table, $whereVar, $whereVal)
   {
-    $where = array('id' => $this->session->userdata['id']);
-     $query = $this->db->get_where('user',$where);
-     return $query->row();
+    $where = array($whereVar => $whereVal);
+    return $this->db->get_where($table, $where)->result();
+  }
 
+  public function getDataRow($table, $whereVar, $whereVal)
+  {
+    $where = array($whereVar => $whereVal);
+    return $this->db->get_where($table, $where)->row();
+  }
+
+  public function deleteData($table, $whereVar, $whereVal)
+  {
+    $where = array($whereVar => $whereVal );
+    $this->db->delete($table, $where);
+  }
+
+  public function updateData($table, $whereVar, $whereVal, $setVar, $setVal)
+  {
+    $where = array($whereVar => $whereVal );
+    $data = array($setVar => $setVal );
+    $this->db->where($where);
+    $this->db->update($table, $data);
+  }
+
+
+  //APPLICATION
+  public function cDetailNode($id)
+  {
+    $data['detail'] = $this->getDataRow('view_node', 'id', $id);
+    $data['node'] = $this->getAllData('view_node');
+    $data['komoditas'] = $this->getAllData('komoditas');
+    $data['dataset'] = $this->getSomeData('view_dataset', 'id_komoditas', $data['detail']->id_komoditas);
+    $data['notification'] = "no";
+    $data['view_name'] = "detailUserNode";
+    $data['dataNode'] = $this->getSomeData('data', 'kode_node',$data['detail']->kode_node );
+    return $data;
+  }
+
+  public function updateNode($id)
+  {
+    $this->updateData('node', 'id', $id, 'nama_node', $this->input->post('nama_node'));
+    $this->updateData('node', 'id', $id, 'id_komoditas', $this->input->post('id_komoditas'));
+  }
+
+  public function turnNode($id)
+  {
+    $this->updateData('node', 'id', $id, 'status', !$this->getDataRow('node', 'id', $id)->status);
   }
 
 
