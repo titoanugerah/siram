@@ -104,9 +104,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
       <div class="pull-right hidden-xs">
-        <b>Version</b> 1.4.0
+        <b>Version</b> 2.0.0
       </div>
-      <strong>Copyright &copy; 2017 <a href="#">Lab Software</a>.</strong> All rights
+      <strong>Copyright &copy; <?php echo date('Y'); ?> <a href="http://siskom.undip.ac.id/">Teknik Komputer UNDIP</a>.</strong> All rights
       reserved.
     </footer>
 

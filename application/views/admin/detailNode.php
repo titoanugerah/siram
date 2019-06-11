@@ -79,14 +79,12 @@
               verticalAlign: 'bottom'
             },
 
-            plotOptions: {
-              series: {
-                label: {
-                  connectorAllowed: false
-                },
-                pointStart: 2010
-              }
-            },
+            xAxis: {
+                 categories: [<?php foreach ($content['dataNode'] as $item1): ?>
+                   <?php  echo '"'.$item1->waktu.'",'; ?>
+                 <?php endforeach; ?>]
+             },
+
 
             series: [{
               name: '<?php echo ucfirst($item->nama_sensor); ?>',

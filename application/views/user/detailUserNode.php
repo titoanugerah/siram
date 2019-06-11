@@ -76,14 +76,12 @@
               verticalAlign: 'bottom'
             },
 
-            plotOptions: {
-              series: {
-                label: {
-                  connectorAllowed: false
-                },
-                pointStart: 2010
-              }
-            },
+            xAxis: {
+                 categories: [<?php $i=1;foreach ($content['dataNode'] as $item1): ?>
+                   <?php  echo '"'.$i.'",'; ?>
+                 <?php $i++; endforeach; ?>]
+             },
+
 
             series: [{
               name: '<?php echo ucfirst($item->nama_sensor); ?>',

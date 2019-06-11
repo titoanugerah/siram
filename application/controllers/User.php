@@ -16,10 +16,10 @@ class User extends CI_Controller{
 
   public function detailUserNode($id)
   {
-    if ($this->input->post('updateNode')) { $this->admin_model->updateNode($id);}
-    elseif ($this->input->post('turn')) {$this->admin_model->turnNode($id);}
+    if ($this->input->post('updateNode')) { $this->user_model->updateNode($id);}
+    elseif ($this->input->post('turn')) {$this->user_model->turnNode($id);}
   //  elseif ($this->input->post('deleteNode')) {$this->admin_model->deleteNode($id);redirect(base_url('node'));}
-    elseif ($this->input->post('downloadConf')) {$this->admin_model->downloadConf($id);}
+    elseif ($this->input->post('downloadConf')) {$this->user_model->downloadConf($id);}
 
     $data['content'] = $this->user_model->cDetailNode($id);
     $this->load->view('template', $data);
