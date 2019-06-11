@@ -179,6 +179,7 @@ class admin_model extends CI_Model{
     $data['dataset'] = $this->getSomeData('view_dataset', 'id_komoditas', $data['detail']->id_komoditas);
     $data['notification'] = "no";
     $data['view_name'] = "detailNode";
+    $data['dataNode'] = $this->getSomeData('data', 'kode_node',$data['detail']->kode_node );
     return $data;
   }
 
@@ -195,8 +196,8 @@ class admin_model extends CI_Model{
 
   public function deleteNode($id)
   {
+    $this->deleteData('data', 'kode_node', $this->getDataRow('view_node', 'id', $id)->kode_node);
     $this->deleteData('node', 'id', $id);
-    $this->deleteData('data', 'id_node', $id);
   }
 
   public function downloadConf($id)
