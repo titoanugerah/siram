@@ -1,3 +1,5 @@
+<meta http-equiv="refresh" content="60">
+
 <div class="box">
   <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
